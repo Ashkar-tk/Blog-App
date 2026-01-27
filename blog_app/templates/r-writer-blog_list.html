@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #0a0f14;
+            color: #e0f7fa;
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        .blog-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(10, 20, 30, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 0 20px cyan;
+            padding: 30px;
+            transition: 0.3s ease;
+        }
+
+        .blog-container:hover {
+            box-shadow: 0 0 35px cyan;
+        }
+
+        .writer-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .writer-info img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid cyan;
+            box-shadow: 0 0 10px cyan;
+        }
+
+        .writer-info h3 {
+            color: cyan;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .blog-title {
+            font-size: 2rem;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+            margin-bottom: 10px;
+        }
+
+        .blog-meta {
+            color: #89f9ff;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .blog-image {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 15px cyan;
+            margin-bottom: 25px;
+        }
+
+        .blog-content {
+            line-height: 1.8;
+            color: #d8faff;
+            font-size: 1rem;
+            margin-bottom: 40px;
+        }
+
+        .comment-section {
+            margin-top: 40px;
+        }
+
+        .comment-section h3 {
+            color: cyan;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px cyan;
+        }
+
+        .comment {
+            background: rgba(0, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 3px solid cyan;
+        }
+
+        .comment strong {
+            color: #00ffff;
+        }
+
+        .comment-form textarea {
+            width: 100%;
+            height: 120px;
+            background: #0a1a22;
+            border: 2px solid cyan;
+            color: #e0f7fa;
+            border-radius: 10px;
+            padding: 10px;
+            resize: none;
+            margin-bottom: 15px;
+            outline: none;
+            transition: 0.3s ease;
+        }
+
+        .comment-form textarea:focus {
+            box-shadow: 0 0 15px cyan;
+        }
+
+        .btn-glow {
+            display: inline-block;
+            background: transparent;
+            color: cyan;
+            border: 2px solid cyan;
+            padding: 10px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .btn-glow:hover {
+            background: cyan;
+            color: #0a0f14;
+            box-shadow: 0 0 20px cyan, 0 0 40px cyan;
+        }
+
+        .back-home {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="blog-container">
+        <div class="writer-info">
+            <img src="writer-profile.jpg" alt="Writer Profile">
+            <h3>John Doe</h3>
+        </div>
+
+        <h1 class="blog-title">The Future of Technology</h1>
+        <p class="blog-meta">Category: Technology | Date: Oct 30, 2025</p>
+
+        <img src="tech-future.jpg" alt="Blog Image" class="blog-image">
+
+        <div class="blog-content">
+            <p>
+                Technology continues to evolve at an unprecedented pace, shaping every aspect of our lives.
+                From AI-driven automation to quantum computing breakthroughs, the digital world is expanding faster than ever.
+                In this blog, we’ll explore what the next decade might bring for innovation and society.
+            </p>
+        </div>
+
+        <div class="comment-section">
+            <h3>Reader Comments</h3>
+
+            <div class="comment">
+                <strong>Alice:</strong>
+                <p>Such an interesting take! Excited for the AI revolution 🔥</p>
+            </div>
+
+            <div class="comment">
+                <strong>Bob:</strong>
+                <p>Great insights. The design and tone are perfect!</p>
+            </div>
+
+            <form class="comment-form">
+                <textarea placeholder="Write your comment here..."></textarea>
+                <button type="submit" class="btn-glow">Post Comment</button>
+            </form>
+        </div>
+
+        <div class="back-home">
+            <button class="btn-glow" onclick="window.location.href='reader_home.html'">Back to Home</button>
+        </div>
+    </div>
+</body>
+</html>

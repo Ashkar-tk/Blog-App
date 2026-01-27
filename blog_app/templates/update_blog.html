@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Blog | MyBlogSpace</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="{% static 'css/add_blog.css' %}" rel="stylesheet">
+</head>
+<body>
+  <div class="glow-bg"></div>
+
+  <div class="container">
+    <a href="{% url 'writer-home' %}" class="back-btn">
+      <i class="bi bi-arrow-left"></i> Back to Dashboard
+    </a>
+
+    <div class="card">
+      <h3 class="text-center mb-4"><i class="bi bi-pencil-square"></i> Edit Blog</h3>
+
+      <form id="updateBlogForm" action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="mb-3">
+          <label for="title" class="form-label">Blog Title</label>
+          <input type="text" id="title" class="form-control text-white" value="{{ blog.blog_title }}" name="title"/>
+        </div>
+
+        <div class="mb-3">
+          <label for="category" class="form-label">Category</label>
+            <select id="category" class="form-select text-white" name="category">
+              <option value="" selected>{{ blog.category }}</option>
+              <option>Technology</option>
+              <option>Lifestyle</option>
+              <option>Travel</option>
+              <option>Food</option> 
+              <option>Education</option>
+               <option>Other</option> 
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="content" class="form-label">Content</label>
+          <textarea id="content" class="form-control text-white" rows="6" name="content" required>{{ blog.content }}</textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="imageUpload" class="form-label">Cover Image</label>
+          <label for="imageUpload" class="image-label">
+            <i class="bi bi-image"></i> Change Image
+          </label>
+          <input type="file" id="imageUpload" accept="image/*" style="display: none" name="cover-image" />
+          {% if blog.image %}
+            <img src="{{ blog.image.url }}" id="previewImage" class="image-preview" alt="Blog Preview" />
+          {% else %}
+            <img id="previewImage" class="image-preview" alt="Blog Preview" style="display:none;" />
+          {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-publish">
+          <i class="bi bi-upload"></i> Save Changes
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const imageInput = document.getElementById("imageUpload");
+    const preview = document.getElementById("previewImage");
+    imageInput.addEventListener("change", (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>

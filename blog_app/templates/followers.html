@@ -1,0 +1,226 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Followers</title>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"> -->
+    <!-- <link rel="stylesheet" href="{% static 'css/followers.css' %}"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+     <style>
+        body {
+    background: #0a0a0a;
+    font-family: "Poppins", sans-serif;
+    padding: 40px 0;
+    color: #fff;
+}
+
+/* MAIN CONTAINER */
+.followers-container {
+    width: 90%;
+    max-width: 900px;
+    margin: auto;
+    margin-top: 30px;
+}
+
+/* TITLE */
+.followers-title {
+    text-align: center;
+    color: #00ffff;
+    font-size: 32px;
+    margin-bottom: 30px;
+    text-shadow: 0 0 18px #00ffff8f;
+}
+
+/* LIST WRAPPER */
+.followers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* CARD */
+.follower-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border: 1px solid rgba(0, 255, 255, 0.15);
+    box-shadow: 0 0 18px rgba(0, 255, 255, 0.15);
+    transition: 0.3s ease;
+}
+
+.follower-card:hover {
+    transform: translateY(-6px);
+    border-color: #00ffff88;
+    box-shadow: 0 0 28px rgba(0,255,255,0.35);
+}
+
+/* IMAGE */
+.follower-img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(0,255,255,0.5);
+    box-shadow: 0 0 12px rgba(0,255,255,0.3);
+}
+
+/* INFO */
+.follower-info h4 {
+    margin: 0;
+    font-size: 18px;
+    color: #fff;
+}
+
+.email {
+    font-size: 13px;
+    color: #9deaff;
+}
+
+/* VIEW BUTTON */
+.view-btn {
+    margin-left: auto;
+    background: rgba(0,255,255,0.12);
+    padding: 8px 18px;
+    border-radius: 50px;
+    color: #00ffff;
+    text-decoration: none;
+    font-size: 14px;
+    border: 1px solid rgba(0,255,255,0.4);
+    transition: 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.view-btn:hover {
+    background: rgba(0,255,255,0.3);
+    box-shadow: 0 0 20px rgba(0,255,255,0.6);
+}
+
+/* EMPTY TEXT */
+.empty-text {
+    text-align: center;
+    color: #8feaff;
+    font-size: 15px;
+    opacity: 0.8;
+}
+
+/* ====== NAVBAR ====== */
+/* ====== NAVBAR ====== */
+.navbar {
+    background: linear-gradient(90deg, #0b0f14, #141d24);
+    border-bottom: 1px solid rgba(0, 255, 255, 0.15);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    margin-top: -39px;
+    padding: 20px;
+}
+
+.navbar-brand {
+    font-weight: 600;
+    color: #00ffff !important;
+    letter-spacing: 1px;
+    text-shadow: 0 0 12px rgba(0,255,255,0.6);
+}
+
+.navbar-nav .nav-link {
+    color: #e6faff !important;
+    margin-left: 10px;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #00ffff !important;
+    text-shadow: 0 0 10px #00ffff;
+    transform: translateY(-2px);
+}
+
+/* Mobile toggle icon fix */
+.navbar-toggler {
+    border: 1px solid rgba(0,255,255,0.4);
+}
+
+.navbar-toggler-icon {
+    filter: drop-shadow(0 0 6px cyan);
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 576px) {
+    .follower-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .view-btn {
+        margin: 0;
+    }
+}
+
+     </style>
+</head>
+
+<body>
+
+ <nav class="navbar navbar-dark navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="#"><i class="bi bi-pen"></i> WriterSpace</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a href="{% url 'writer-home' %}" class="nav-link">Home</a></li>
+          <!-- <li class="nav-item"><a href="#" class="nav-link">My Blogs</a></li> -->
+          <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<div class="followers-container">
+
+    <h2 class="followers-title">Followers</h2>
+    <div class="followers-list">
+        {% for follower in followers %}
+        <div class="follower-card">
+
+            <!-- PROFILE IMAGE -->
+            {% if follower.profile_image %}
+                <img src="{{ follower.profile_image.url }}" class="follower-img">
+            {% else %}
+                <img src="{% static 'images/writer_default.png' %}" class="follower-img">
+            {% endif %}
+
+            <!-- NAME -->
+            <div class="follower-info">
+                <h4>{{ follower.first_name }}</h4>
+                <p class="email">{{ follower.email }}</p>
+            </div>
+
+            <!-- OPTIONAL ACTION BUTTON -->
+            <a href="{% url 'writer-home' %}" class="view-btn">
+                <i class="bi bi-eye"></i> View
+            </a>
+
+        </div>
+        {% empty %}
+            <p class="empty-text">You have no followers yet.</p>
+        {% endfor %}
+
+    </div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

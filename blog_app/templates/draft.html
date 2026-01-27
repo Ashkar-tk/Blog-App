@@ -1,0 +1,245 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Drafts | BlogVerse</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+:root {
+    --bg-dark: #020617;
+    --card-dark: #0f172a;
+    --cyan: #00eaff;
+    --cyan-soft: rgba(0,234,255,0.35);
+    --text-light: #e6faff;
+    --text-muted: #94a3b8;
+}
+
+body {
+    background: radial-gradient(circle at top, #0a0f1f, #020617);
+    color: var(--text-light);
+    font-family: "Poppins", sans-serif;
+}
+
+/* ---------- TITLE ---------- */
+.page-title {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--cyan);
+    text-shadow: 0 0 15px var(--cyan-soft);
+}
+
+/* ---------- CARD ---------- */
+.draft-card {
+    background: rgba(15,23,42,0.85);
+    border: 1px solid rgba(0,234,255,0.25);
+    border-radius: 18px;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: 0.35s ease;
+    box-shadow: 0 0 25px rgba(0,234,255,0.12);
+}
+
+.draft-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 40px rgba(0,234,255,0.45);
+    border-color: var(--cyan);
+}
+
+/* ---------- IMAGE ---------- */
+.draft-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 1px solid rgba(0,234,255,0.25);
+}
+
+/* ---------- BODY ---------- */
+.draft-body {
+    padding: 18px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.draft-title {
+    color: #7df9ff;
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+}
+
+.draft-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+.category-badge {
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: rgba(0,234,255,0.15);
+    border: 1px solid rgba(0,234,255,0.4);
+    color: var(--cyan);
+    font-size: 11px;
+    margin-left: 6px;
+}
+
+/* ---------- SNIPPET (FIXED HEIGHT) ---------- */
+.draft-snippet {
+    font-size: 14px;
+    color: #c9f7ff;
+    line-height: 1.6;
+    height: 4.8em;               /* ~3 lines */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+/* ---------- ACTIONS (STAYS AT BOTTOM) ---------- */
+.draft-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;            /* KEY FIX */
+}
+
+/* ---------- BUTTONS ---------- */
+.btn {
+    flex: 1;
+    border-radius: 10px;
+    font-size: 14px;
+    padding: 8px;
+}
+
+/* EDIT */
+.btn-edit {
+    background: transparent;
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+}
+
+.btn-edit:hover {
+    background: rgba(0,234,255,0.15);
+    box-shadow: 0 0 15px rgba(0,234,255,0.6);
+}
+
+/* PUBLISH */
+.btn-publish {
+    background: linear-gradient(90deg, #00eaff, #0077ff);
+    color: #020617;
+    font-weight: 600;
+    padding: 10px 56px;
+}
+
+.btn-publish:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(0,234,255,0.8);
+}
+
+
+
+/* ====== NAVBAR ====== */
+.navbar {
+    background: linear-gradient(90deg, #0b0f14, #141d24);
+    border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.08);
+}
+
+.navbar-brand {
+    font-weight: 600;
+    color: var(--cyan) !important;
+    letter-spacing: 1px;
+    transition: 0.3s ease;
+}
+
+.nav-link {
+    color: var(--text-light) !important;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--cyan) !important;
+    text-shadow: 0 0 10px var(--cyan);
+    transform: translateY(-2px);
+}
+
+</style>
+</head>
+
+<body>
+<!-- Navbar -->
+  <nav class="navbar navbar-dark navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="#"><i class="bi bi-pen"></i> WriterSpace</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a href="{% url 'writer-home' %}" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">My Blogs</a></li>
+          <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+<div class="container my-5">
+    <h2 class="page-title"> Drafted Blogs</h2>
+
+    <div class="row g-4">
+        {% for blog in drafted_blogs %}
+        <div class="col-md-6 col-lg-4">
+
+            <div class="draft-card">
+
+                {% if blog.image %}
+                    <img src="{{ blog.image.url }}" class="draft-img">
+                {% else %}
+                    <img src="{% static 'images/blog_default.png' %}" class="draft-img">
+                {% endif %}
+
+                <div class="draft-body">
+                    <h5 class="draft-title">{{ blog.blog_title }}</h5>
+
+                    <div class="draft-meta">
+                        <i class="bi bi-clock"></i>
+                        {{ blog.created_at|date:"M d, Y H:i" }}
+                        <span class="category-badge">{{ blog.category }}</span>
+                    </div>
+
+                    <p class="draft-snippet">
+                        {{ blog.content }}
+                    </p>
+
+                    <div class="draft-actions">
+                        <a href="{% url 'update-blogs' blog.id %}" class="btn btn-edit">
+                            <i class="bi bi-pencil-square"></i> Edit
+                        </a>
+
+                        <form method="post" action="{% url 'publish-draft' blog.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-publish">
+                                <i class="bi bi-upload"></i> Publish
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        {% empty %}
+        <p class="text-center text-muted">No drafts available.</p>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>

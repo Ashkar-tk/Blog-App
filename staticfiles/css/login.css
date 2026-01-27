@@ -1,0 +1,142 @@
+    /* ===== Base Layout ===== */
+    body {
+      background: linear-gradient(135deg, #101820 0%, #1c1c1c 100%);
+      font-family: 'Poppins', sans-serif;
+      color: #f5f5f5;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ===== Login Card ===== */
+    .login-card {
+      background: #181a1b;
+      border-radius: 18px;
+      width: 400px;
+      padding: 35px 30px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+      transition: all 0.4s ease;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .login-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 50px rgba(0, 255, 255, 0.2);
+    }
+
+    /* ===== Icon Header ===== */
+    .icon-header {
+      font-size: 48px;
+      color: #00c2cb;
+      display: block;
+      text-align: center;
+      margin-bottom: 12px;
+      transition: color 0.5s ease;
+    }
+
+    .login-card:hover .icon-header {
+      color: #1ae0e6;
+    }
+
+    .login-card h3 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    /* ===== Role Toggle ===== */
+    .role-toggle {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    label.role-btn {
+      border: 1px solid #00c2cb;
+      border-radius: 25px;
+      padding: 6px 18px;
+      font-size: 14px;
+      color: #00c2cb;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    input[type="radio"]:checked + label.role-btn {
+      background-color: #00c2cb;
+      color: #121212;
+      font-weight: 500;
+      box-shadow: 0 0 10px rgba(0, 194, 203, 0.6);
+    }
+
+    /* ===== Form Inputs ===== */
+    /* .form-control {
+      border-radius: 10px;
+      padding: 10px 12px;
+      background-color: #222;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      transition: all 0.3s ease;
+    } */
+
+    .form-control {
+      border-radius: 10px;
+      padding: 10px 12px;
+      background-color: #222;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+      transition: all 0.3s ease;
+    }
+
+    .form-control::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+      opacity: 1;
+    }
+
+
+    .form-control:focus {
+      background-color: #2a2a2a;
+      border-color: #00c2cb;
+      box-shadow: 0 0 10px rgba(0, 194, 203, 0.3);
+      color: #ffffff;
+    }
+
+    /* ===== Login Button ===== */
+    .btn-login {
+      width: 100%;
+      border-radius: 10px;
+      background-color: #00c2cb;
+      color: #121212;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-login:hover {
+      background-color: #1ae0e6;
+      box-shadow: 0 0 15px rgba(0, 194, 203, 0.6);
+    }
+
+    /* ===== Footer Text ===== */
+    .form-text {
+      text-align: center;
+      margin-top: 20px;
+      color: #b3b3b3;
+      font-size: 14px;
+    }
+
+    .form-text a {
+      color: #00c2cb;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .form-text a:hover {
+      text-decoration: underline;
+    }

@@ -1,0 +1,195 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writer Dashboard</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --accent: #00ffff;
+            --text-light: #d6faff;
+            --bg-dark: #0a0a0a;
+        }
+
+        body {
+            background: var(--bg-dark);
+            font-family: "Poppins", sans-serif;
+            margin: 0;
+            padding-top: 80px;
+            color: #fff;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            background: linear-gradient(90deg, #0b0f14, #141d24);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.15);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+            color: var(--accent) !important;
+            letter-spacing: 1px;
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            margin-left: 15px;
+            transition: 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--accent) !important;
+            text-shadow: 0 0 10px var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* ===== DASHBOARD ===== */
+        .dashboard-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .dash-title {
+            text-align: center;
+            color: var(--accent);
+            font-size: 32px;
+            text-shadow: 0 0 18px #00ffff80;
+            margin-bottom: 40px;
+        }
+
+        .dash-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+
+        .dash-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px 20px;
+            border-radius: 18px;
+            border: 1px solid rgba(0,255,255,0.2);
+            box-shadow: 0 0 25px rgba(0,255,255,0.15);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .dash-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 0 40px rgba(0,255,255,0.35);
+            border-color: var(--accent);
+        }
+
+        .icon {
+            font-size: 46px;
+            color: var(--accent);
+            text-shadow: 0 0 14px rgba(0,255,255,0.6);
+            margin-bottom: 12px;
+        }
+
+        .dash-number {
+            font-size: 36px;
+            font-weight: 700;
+            margin: 5px 0;
+            color: #fff;
+        }
+
+        .dash-label {
+            font-size: 15px;
+            letter-spacing: 1px;
+            color: #b8faff;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-dark navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <i class="bi bi-pen"></i> WriterSpace
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navmenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a href="{% url 'writer-home' %}" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- DASHBOARD -->
+<div class="dashboard-container">
+    <h2 class="dash-title">Dashboard</h2>
+
+    <div class="dash-grid">
+
+        <div class="dash-card">
+            <i class="bi bi-people icon"></i>
+            <h3 class="dash-number">{{ followers }}</h3>
+            <p class="dash-label">Followers</p>
+        </div>
+
+        <div class="dash-card">
+            <i class="bi bi-journal-text icon"></i>
+            <h3 class="dash-number">{{ blogs }}</h3>
+            <p class="dash-label">Total Blogs</p>
+        </div>
+
+        <div class="dash-card">
+            <i class="bi bi-chat-dots icon"></i>
+            <h3 class="dash-number">{{ comments }}</h3>
+            <p class="dash-label">Comments</p>
+        </div>
+
+        <div class="dash-card">
+            <i class="bi bi-hand-thumbs-up icon"></i>
+            <h3 class="dash-number">{{ like_count }}</h3>
+            <p class="dash-label">Likes</p>
+        </div>
+
+        <div class="dash-card">
+            <i class="bi bi-hand-thumbs-down icon"></i>
+            <h3 class="dash-number">{{ dislike_count }}</h3>
+            <p class="dash-label">Dislikes</p>
+        </div>
+
+        <div class="dash-card">
+            <i class="bi bi-eye icon"></i>
+            <h3 class="dash-number">{{ viewers_count }}</h3>
+            <p class="dash-label">Total Viewers</p>
+        </div>
+
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

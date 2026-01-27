@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Blogs | Writer Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="{% static 'css/writer_blogs.css' %}" rel="stylesheet" >
+</head>
+
+<body>
+  <div class="glow-bg"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#"><i class="bi bi-pen"></i> WriterSpace</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a href="{% url 'writer-home' %}" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="{% url 'add-blog' %}" class="nav-link">Add Blog</a></li>
+          <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  {% if messages %}
+  <div class="container mt-3">
+    {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+  <!-- Main Blog Section -->
+  <div class="container">
+    <!-- Blog 1 -->
+    <div class="blog-card">
+      <h2>{{ blog.blog_title }}</h2>
+      
+          {% if blog.image and blog.image.url %}
+          <img src="{{ blog.image.url }}" class="blog-img" alt="Blog Image">
+          {% else %}
+          <img src="{% static 'images/blog_default.png' %}" class="blog-img" alt="Default Blog Image">
+          {% endif %}
+
+      <div class="card-body">
+        <!-- <h4 class="blog-title"></h4> -->
+        <p class="blog-text">Category : {{ blog.category }}</p>
+        <p class="blog-meta"><i class="bi bi-calendar3"></i> Published on : {{ blog.created_at }}</p>
+        <p class="blog-text">{{ blog.content }}</p>
+
+        <div class="action-btns">
+          <a href="{% url 'update-blogs' blog.id %}"><i class="bi bi-pencil"></i> Edit</a>
+          <a href="{% url 'delete-blog' blog.id %}"><i class="bi bi-trash"></i> Delete</a>
+        </div>
+
+        <div class="comment-box">
+          <h6><i class="bi bi-chat-dots" style="padding-right: 8px;"></i>Comments</h6>
+          {% if comments %}
+          {% for comment in comments %}
+          <div class="comment">
+            <p class="commenter">{{ comment.user.first_name }}</p>
+            <p class="comment-text">{{ comment.comment }}</p>
+          </div>
+          {% endfor %}
+          {% else %}
+            <p class="comment-text">No comments!</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
