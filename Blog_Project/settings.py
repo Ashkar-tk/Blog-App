@@ -69,7 +69,7 @@ WSGI_APPLICATION = 'Blog_Project.wsgi.application'
 
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv("64d2213fe48cf14791c30e7ab63c171c"))
+    'default': dj_database_url.config(default=os.getenv("postgresql://blogapp_2n9p_user:1UPlOaUukkQ33TpDLRGeGhk5YbHfjTfR@dpg-d5vdbjkr85hc73e4u2e0-a/blogapp_2n9p"))
 }
 
 
