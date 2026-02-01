@@ -69,7 +69,7 @@ WSGI_APPLICATION = 'Blog_Project.wsgi.application'
 
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv("DATABASE_URL"))
+    'default': dj_database_url.config(default=os.getenv("64d2213fe48cf14791c30e7ab63c171c"))
 }
 
 
@@ -120,3 +120,4 @@ EMAIL_USE_TLS=True
 EMAIL_HOST_USER="iamashkar000@gmail.com"
 EMAIL_HOST_PASSWORD="etmo faxr trpd qqvk"
 
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
