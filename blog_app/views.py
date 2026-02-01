@@ -304,7 +304,8 @@ class SpecificWriter(LoginRequiredMixin, View):
             else:
                 writer.followers.add(user)
         return redirect('writer',id=writer.id)
-    
+
+
 class BlogLikeDislikeView(LoginRequiredMixin, View):
     def post(self,request,blog_id):
         blog=get_object_or_404(Blog, id=blog_id)
